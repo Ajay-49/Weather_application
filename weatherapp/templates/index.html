@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container mt-5 bg-light">
+        <div class="row justify-content-center">
+            <h1 class="display-4 text-primary text-center">What's the weather now?</h1>
+        </div>
+        <div class="row justify-content-center my-4">
+          <div class="col-md-6"> <form method="get">
+                  <div class="row">
+                      <div class="col-md-6 mb-3 text-center">
+                          <h4>Select the city1</h4>
+                          <input type="text" class="form-control" name="city1" placeholder="city name">
+                          <button type="submit" class="btn btn-success savebutton mt-2" name="save_city" value="city1">Save city</button>
+                          <p id="savedCity1"></p>
+                      </div>
+                      <div class="col-md-6 mb-3 text-center">
+                          <h4>Select the city2</h4>
+                          <input type="text" class="form-control" name="city2" placeholder="city name">
+                          <button type="submit" class="btn btn-success savebutton mt-2" name="save_city" value="city2">Save city</button>
+                          <p id="savedCity2"></p>
+                      </div>
+                  </div>
+                  <div class="text-center button-container">
+                      <button type="submit" class="btn btn-primary mb-2 p-3">Compare</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      {% if data %}
+      <h2 class="text-center">Weather Comparison</h2>
+      <br>
+       <div class="row justify-content-around">
+          <div class="col-md-5">
+              <h4>{{ data.city1.name }}</h4>
+              <p>Temperature: {{ data.city1.temp }} &#8451;</p>
+              <p>Humidity: {{ data.city1.humidity }}%</p>
+              <p>Description: {{ data.city1.desc }}</p>
+          </div>
+          <div class="col-md-5">
+               <h4>{{ data.city2.name }}</h4>
+              <p>Temperature: {{ data.city2.temp }} &#8451;</p>
+              <p>Humidity: {{ data.city2.humidity }}%</p>
+              <p>Description: {{ data.city2.desc }}</p>
+           </div>
+      </div>
+      {% endif %}
+      <h2 class="text-center mt-4">Saved Cities</h2>
+      <div class="row justify-content-center">
+          <div class="col-md-6 text-center">
+              <ul class="list-group">
+                  {% if saved_cities %}
+                      {% for city in saved_cities %}
+                          <li class="list-group-item">{{ city }}</li>
+                      {% endfor %}
+                  {% else %}
+                      <li class="list-group-item">No cities saved yet.</li>
+                  {% endif %}
+              </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
